@@ -25,15 +25,15 @@ def preprocessing_pipeline(image,path):
 
     # skewness correction
 
-
     # image scaling correction
+    
 
     # blur correction
 
     # is image shadowed
 
     # binarization
-    
+
     # noise removal
 
     cv2.waitKey(0)
