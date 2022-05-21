@@ -74,6 +74,33 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 /*--------------------------------------------------------------
+# loader
+--------------------------------------------------------------*/
+.container-loader {
+  text-align: center;
+  width: 100px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+}
+.line {
+  margin-top: 8px;
+  width: 100%;
+  height: 40px;
+  background-color: green;
+  animation: loading 2s linear;
+  animation-iteration-count: infinite;
+}
+@keyframes loading {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
 .back-to-top {
@@ -146,6 +173,7 @@ h1, h2, h3, h4, h5, h6 {
   transition: 0.3s;
   font-size: 14px;
   display: inline-block;
+  border: #009961 !important;
 }
 .get-started-btn:hover {
   background: #00b371;
