@@ -28,7 +28,6 @@ def preprocessing_pipeline(image,path):
     # document detection
     # contour detection
 
-
     # skewness correction
     # deskew = skew_correction(image)
     # image = rotate(image, skew_correction(image), cval=1)
@@ -60,7 +59,7 @@ def get_string(img_path):
     return result
 def main():
     global path
-
+    print(path)
     # load_image
     image = load_image('C:/Users/hp/Documents/major-project/Backend/images/Capture.PNG') #TODO: change img path
     # display_image(image,"Original")
