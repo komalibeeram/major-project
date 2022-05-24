@@ -1,5 +1,21 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from .forms import *
+import temp
 # Create your views here.
 def index(request):
-    return render(request, template_name="index.html") 
+    if request.method == 'POST':
+        form=ImageForm(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+            img_obj = form.instance
+            check(img_obj)
+            return render(request, 'index.html', {'form': form, 'img_obj': img_obj})
+    else:
+        form=ImageForm()
+    return render(request, 'index.html', {'form':form})
+
+def check(obj):
+    print(obj.img.url)
+    print("inside check:",temp.fun(obj))
+    
