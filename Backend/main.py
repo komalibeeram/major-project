@@ -4,9 +4,9 @@ from edge_detection import edge_detection
 from contour_detection import contour_detection, locate_document
 import cv2
 
+# path = "/images/username_image" # image path
 
-
-path = "/images/username_image" # image path
+path = "C:/Users/Soumya/Desktop/major-project/Backend/"
 
 def preprocessing_pipeline(image,path):
 
@@ -21,7 +21,7 @@ def preprocessing_pipeline(image,path):
     # contour detection
     contours = contour_detection(edges)
     image = locate_document(image, contours)
-    save_image(image,'_detected_document',path,)
+    save_image(image,'_detected_document.jpg',path,)
 
     # skewness correction
 
@@ -41,10 +41,10 @@ def preprocessing_pipeline(image,path):
 
 def main():
     global path
-
+    print(path)
     # load_image
-    img = load_image(path+'_original.jpg')
-    display_image(img,"Original")
+    image = load_image(path+"image.jpg")    # image = load_image(path+'_original.jpg')
+    display_image(image,"Original")
 
     preprocessing_pipeline(image,path)
 
