@@ -87,7 +87,50 @@
         <div class="col-xl-8">
           <h1>KnightOne - Create Bootstrap Website Template</h1>
           <h2>We are team of designers making websites with Bootstrap</h2>
-          <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox play-btn mb-4"></a>
+          <!-- <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox play-btn mb-4"></a> -->
+          <a href="#about" class="get-started-btn scrollto" id="popup" onclick="div_show()">Upload Image</a>
+          <script type="text/javascript">
+            // function open_file(){
+            //     document.getElementById('input_file').click();
+            // }
+            function div_show() {
+document.getElementById('pop-up').style.display = "block";
+}
+//Function to Hide Popup
+function div_hide(){
+document.getElementById('pop-up').style.display = "none";
+}
+          </script>
+          <style>
+            
+            #pop-up{
+              display: none;
+              display: none;
+	position: absolute;
+	top: 50%;
+	left: 38%;
+	/* width: 50%; */
+	/* height: 50%; */
+	padding: 16px;
+  border: none !important;
+	/* border: 16px solid orange; */
+	background-color: white;
+	z-index:1002;
+	overflow: auto;
+            }
+          </style>
+          <!-- <input type="file" name="" id='input_file' hidden> -->
+          <!-- <button onclick="open_file()">
+            click event fire programmatically for input 
+            type file element
+          </button> -->
+          <div id="pop-up">
+            <form method = "post" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <button type="submit" class="get-started-btn scrollto" style="border: none;">Generate Text</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -107,22 +150,27 @@
         <div class="row content">
           <div class="col-lg-6">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
+              Your image is being converted.
             </p>
-            <ul>
+            <!-- <ul>
               <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
               <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>
               <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
-            </ul>
+            </ul> -->
+            <div class="container-loader">
+              Please Wait...
+              <div class="line"></div>
+            </div>
+            {% if img_obj %}
+            <h3>Succesfully uploaded : !!</h3>
+            <img src="{{ img_obj.img.url}}" alt="connect" style="max-height:300px">
+          {% endif %}
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0">
             <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-              culpa qui officia deserunt mollit anim id est laborum.
+              To generate voice output, click the button below.
             </p>
-            <a href="#" class="btn-learn-more">Learn More</a>
+            <a href="#" class="btn-learn-more">Generate Speech</a>
           </div>
         </div>
 
@@ -236,7 +284,7 @@
               <p>Expedita veritatis consequuntur nihil tempore laudantium vitae denat pacta</p>
             </div>
           </div>
-          <div class="image col-lg-6 order-1 order-lg-2" style='background-image: url({% static 'img/features.jpg' %});'></div>
+          <div class="image col-lg-6 order-1 order-lg-2" style='background-image: url("majorproject/static/img/features.jpg");'></div>
         </div>
 
       </div>
