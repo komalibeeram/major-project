@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import *
 import temp
+import image_to_text.main_code as image_code
+import os
 # Create your views here.
 def index(request):
     if request.method == 'POST':
@@ -18,4 +20,4 @@ def index(request):
 def check(obj):
     print(obj.img.url)
     print("inside check:",temp.fun(obj))
-    
+    image_code.main(obj.img.url)

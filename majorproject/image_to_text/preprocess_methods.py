@@ -1,5 +1,5 @@
 import cv2
-from image_helper_functions import *
+from .image_helper_functions import *
 import numpy as np
 from skimage.transform import hough_line, hough_line_peaks
 from skimage.transform import rotate
