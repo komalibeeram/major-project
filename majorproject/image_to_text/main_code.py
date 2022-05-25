@@ -7,7 +7,7 @@ from gtts import gTTS
 # from IPython.display import Audio
 import nltk
 
-path = "C:/Users/Soumya/Desktop/major-project/majorproject/image_to_text/images/" # image path
+path = "C:/Users/hp/Documents/major-project/majorproject/image_to_text/images/" # image path
 
 def preprocessing_pipeline(image,path):
     # is image shadowed
@@ -73,17 +73,17 @@ def text_to_speech(text):
 
     # Saving the converted audio in a wav file named
     # welcome
-    myobj.save("audio_file.mp3")
+    myobj.save("C:/Users/hp/Documents/major-project/majorproject/static/audio_file.mp3")
 
 def save_text(text):
-    text = "".join(text)
-    text_file = open('data.txt','w',encoding="utf-8")
+    text = "".join(text)     
+    text_file = open('C:/Users/hp/Documents/major-project/majorproject/static/data.txt','w',encoding="utf-8")
     text_file.write(text)
     text_file.close()
 
 def main(image_path):
     global path
-    image_path='C:/Users/Soumya/Desktop/major-project/majorproject'+image_path
+    image_path='C:/Users/hp/Documents/major-project/majorproject'+image_path
     print(image_path)
     # load_image
     image = load_image(image_path) #TODO: change img path

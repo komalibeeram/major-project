@@ -89,6 +89,7 @@
 
 
   <main id="main">
+    
    <!-- ======= Features Section ======= -->
    <section id="features" class="features">
     <div class="container">
@@ -186,18 +187,16 @@
           <div class="col-lg-6 cta-btn-container text-center">
 
             <button type="button" class="btn btn-primary cta-btn align-middle" style="border-color: #009961; box-shadow: none;">
-              <a href="base.html" download style="color: white;">Download Text</a>
+              <a href="{% static 'data.txt' %}" download="welcome.mp3" style="color: white;">Download Text</a>
             </button>
             <button type="button" class="btn btn-primary cta-btn align-middle" style="border-color: #009961; box-shadow: none;">
-              <a href="major-project/majorproject/welcome.mp3" download="welcome.mp3" style="color: white;">Download Audio</a>
+              <a href="{% static 'audio_file.mp3' %}" download="welcome.mp3" style="color: white;">Download Audio</a>
             </button>
           </div>
         </div>
          
       </div>
     </section><!-- End Cta Section -->
-
-
 
 
   
@@ -240,7 +239,6 @@
 
   <!-- Template Main JS File -->
   <script src="{% static 'js/main.js' %}"></script>
-
 </body>
 
 </html>
