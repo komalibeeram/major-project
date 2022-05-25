@@ -4,7 +4,7 @@ import cv2
 import pytesseract
 from PIL import Image
 from gtts import gTTS
-from IPython.display import Audio
+# from IPython.display import Audio
 import nltk
 
 path = "C:/Users/Soumya/Desktop/major-project/majorproject/image_to_text/images/" # image path
@@ -97,6 +97,6 @@ def main(image_path):
     text = clean_text(text)
     text_to_speech(text)
     # Playing the converted file
-    Audio("welcome.mp3",autoplay=True)
+    # Audio("welcome.mp3",autoplay=True)
 
 
