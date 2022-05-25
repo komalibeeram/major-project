@@ -73,7 +73,7 @@ def text_to_speech(text):
 
     # Saving the converted audio in a wav file named
     # welcome
-    myobj.save("welcome.mp3")
+    myobj.save("audio_file.mp3")
 
 def save_text(text):
     text = "".join(text)
