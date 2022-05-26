@@ -18,6 +18,7 @@ def index(request):
     return render(request, 'index.html', {'form':form})
 
 def check(obj):
+    # function to preprocess, detect and extract text from image
     print(obj.img.url)
     print("inside check:",temp.fun(obj))
     image_code.main(obj.img.url)

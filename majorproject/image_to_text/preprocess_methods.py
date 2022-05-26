@@ -6,10 +6,10 @@ from skimage.transform import rotate
 from skimage.feature import canny
 from skimage.io import imread
 from skimage.color import rgb2gray
-# import matplotlib.pyplot as plt
 from scipy.stats import mode
 
 def grayscale(image, path):
+
     if(len(image.shape)>=3):
         # convert to grayscale
         image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -17,12 +17,14 @@ def grayscale(image, path):
     return image
 
 def edge_detection(image):
+
     kernel = np.ones((5,5),'uint8')
     image = cv2.dilate(image,kernel,iterations=1)
     edges = cv2.Canny(image, 100, 70)
     return edges
 
 def morphology(image):
+
     # threshold
     thresh = cv2.threshold(image, 190, 255, cv2.THRESH_BINARY)[1]
 
@@ -34,9 +36,10 @@ def morphology(image):
     return morph
 
 def contour_detection(image):
-    # convert to grayscale
+
     # convert to grayscale
     gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+
     # threshold
     thresh = cv2.threshold(gray, 190, 255, cv2.THRESH_BINARY)[1]\
 
@@ -56,7 +59,6 @@ def contour_detection(image):
             area_thresh = area
             big_contour = c
 
-
     # get bounding box
     x,y,w,h = cv2.boundingRect(big_contour)
 
@@ -75,6 +77,7 @@ def contour_detection(image):
 
 
 def skew_correction(image):
+
     # convert to edges
     # Classic straight-line Hough transform between 0.1 - 180 degrees.
     tested_angles = np.deg2rad(np.arange(0.1, 180.0))
@@ -88,17 +91,19 @@ def skew_correction(image):
     
     # convert the angle to degree for rotation.
     skew_angle = np.rad2deg(most_common_angle - np.pi/2)
-    print(skew_angle[0])
+    print(skew_angle)
     # skewed_img=rotate(image, skew_correction(image), cval=1)
-    return skew_angle[0]
+    return skew_angle
 
 
 def blur_correction(image):
+
     sharpen_kernel = np.array([[-1,-1,-1], [-1,9,-1], [-1,-1,-1]])
     sharpen_img = cv2.filter2D(image, -1, sharpen_kernel)
     return sharpen_img
 
 def shadow(image):
+
     dilated_img = cv2.dilate(image, np.ones((7,7), np.uint8)) 
     bg_img = cv2.medianBlur(dilated_img, 21)
     diff_img = 255 - cv2.absdiff(image, bg_img)
@@ -109,6 +114,7 @@ def shadow(image):
     return thr_img
 
 def denoise(image):
+    
     dst = cv2.fastNlMeansDenoisingColored(image, None, 11, 6, 7, 21)
     denoised_img = cv2.cvtColor(dst, cv2.COLOR_BGR2RGB)
     return denoised_img
