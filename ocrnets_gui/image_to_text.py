@@ -8,6 +8,7 @@ import sys
 import nltk
 import datetime
 global final_file_name 
+import time
 
 def preprocessing_pipeline(image,save_path):
 
@@ -36,28 +37,43 @@ def text_to_speech(text,save_path):
     language = 'en'
     myobj = gTTS(text,lang=language)
     file_name = save_path+final_file_name+"_audio_file.mp3"
-    print(file_name)
+    # print(file_name)
     myobj.save(file_name)
 
 def save_text(text,save_path):
+    if "leaveapplication" in save_path:
+        pass
     text = "".join(text)     
     file_name = save_path+final_file_name+"_data_file.txt"
-    print(file_name)
+    # print(file_name)
     text_file = open(file_name,'w',encoding="utf-8")
     text_file.write(text)
     text_file.close()
 
 def main(image_path, save_path):
+    start = time.process_time()
     image = load_image(image_path) 
-    # print(save_path+"images\\")
     preprocessing_pipeline(image,save_path)
-    # print(save_path+"images\\")
-    # print ('--- Start recognize text from image ---')
+    preprocess_time = time.process_time()
+    print("---Preprocessing took ",str(preprocess_time-start)," seconds---")
+
     text = get_string(save_path+'images\_final1.png')
     save_text(text,save_path)
-    # print ("------ Done -------")
+    ocr_time = time.process_time()
+    print("---Text Extraction took ",str(ocr_time-preprocess_time)," seconds---")
+
     text = clean_text(text)
+    info_extract = time.process_time()
+    print("---Information Extraction took ",str(info_extract-ocr_time)," seconds---")
+
     text_to_speech(text,save_path)
+    speech_extract = time.process_time()
+    print("---Text to Speech Conversion took ",str(speech_extract-info_extract)," seconds---")
+
+
+    print("---Entire Process took ",str(info_extract - start)," seconds---")
+
+    print(final_file_name)
     return final_file_name
 
 if __name__=="__main__":

@@ -86,7 +86,7 @@ class OCRNets(tk.Tk):
         self.progress_bar = ttk.Progressbar(self, mode='indeterminate', length=150)        
         self.progress_bar.place(x=700,y=100,anchor='center')    
         
-        self.txt = scrolledtext.ScrolledText(self,width = 80, height = 7)  
+        self.txt = tk.Text(self,width = 80, height = 7)  
         self.txt.place(x=600,y=190,anchor='center')
         self.txt.insert('end', "Logs...."+'\n')
 
@@ -100,8 +100,29 @@ class OCRNets(tk.Tk):
             self.btn_1.destroy()
 
     def display_and_download(self):
-        self.label_1 = tk.Label(self,text="You can find the audio and text files saved at:"+str(save_path),font=('bold',11))
-        self.label_1.place(x=600,y=100,anchor="center")
+        os.system("start "+save_path)
+        self.label_1 = tk.Label(self, text="Data Successfully Extracted!",font=(16))
+        self.label_1.place(x=600, y=130,anchor='center')
+
+        self.label_2 = tk.Label(self,text="The data has been extracted from your image. A pop-up window would have appeared to show you the file location.")
+        self.label_2.place(x=600,y=170,anchor="center")
+
+        self.label_3 = tk.Label(self,text="You can find the audio and text files saved at: "+str(save_path))
+        self.label_3.place(x=600,y=200,anchor="center")
+
+        self.btn_1 = ttk.Button(self, text="Upload Another Image", command=lambda: destroy_widgets() or self.upload_page())
+        self.btn_1.place(x=310, y=320, anchor="center")
+
+        self.btn_2 = ttk.Button(self, text="Quit", command=lambda: self.destroy())
+        self.btn_2.place(x=950, y=320, anchor="center")
+
+        def destroy_widgets():
+            self.label_1.destroy()
+            self.label_2.destroy()
+            self.label_3.destroy()
+            self.btn_1.destroy()
+            self.btn_2.destroy()        
+        
 
     def onStart(self):
         # self.startBtn.config(state=tk.DISABLED)
@@ -129,9 +150,9 @@ class OCRNets(tk.Tk):
 def image_digitization(q, filepath):
     global file_names
     text = subprocess.getstatusoutput('Python image_to_text.py '+filepath+' '+save_path)
-    print(type(text[1]))
+    # print(type(text[1]))
     file_names = text[1].split('\n')
-    print(file_names)
+    print(file_names[-1])
     q.put(text[1])
 
 if __name__ == "__main__":
